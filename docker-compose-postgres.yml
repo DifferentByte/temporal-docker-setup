@@ -1,7 +1,7 @@
-version: "3.5"
 services:
   postgresql:
     container_name: temporal-postgresql
+    restart: always
     environment:
       POSTGRES_PASSWORD: temporal
       POSTGRES_USER: temporal
@@ -14,6 +14,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
   temporal:
     container_name: temporal
+    restart: always
     depends_on:
       - postgresql
     environment:
@@ -32,6 +33,7 @@ services:
       - ./dynamicconfig:/etc/temporal/config/dynamicconfig
   temporal-admin-tools:
     container_name: temporal-admin-tools
+    restart: always
     depends_on:
       - temporal
     environment:
@@ -44,6 +46,7 @@ services:
     tty: true
   temporal-ui:
     container_name: temporal-ui
+    restart: always
     depends_on:
       - temporal
     environment:
